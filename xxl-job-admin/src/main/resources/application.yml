@@ -1,0 +1,64 @@
+### 选择使用环境配置
+spring:
+  profiles:
+    active: dev
+
+---
+### web
+server:
+  port: 8080
+  context-path: /
+
+### datasource,resources
+spring:
+  profiles: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/xxl-job?Unicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    tomcat:
+      max-wait: 10000
+      max-active: 30
+      test-on-borrow: true
+
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+
+  ### freemarker
+  freemarker:
+    templateLoaderPath: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    request-context-attribute: request
+
+### mybatis
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+
+### xxl-job email
+xxl:
+  job:
+    mail:
+      host: smtp.163.com
+      port: 25
+      ssl: false
+      username: ovono802302@163.com
+      password: asdfzxcv
+      sendNick: 《任务调度平台XXL-JOB》
+
+    ### xxl-job login
+    login:
+      username: admin
+      password: 123456
+
+    ### xxl-job, access token
+    accessToken:
+
+    ### xxl-job, i18n (default empty as chinese, "en" as english)
+    i18n:
